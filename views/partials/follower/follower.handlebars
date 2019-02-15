@@ -1,0 +1,10 @@
+<div class="avatar">
+    <a href="/viewuser/{{this.User.userId}}">
+        {{#if this.User.avatar}}
+        <img src="{{this.User.avatar}}">
+        {{else}}
+        <img src="/images/user-avatar.png">
+        {{/if}}
+    </a>
+</div>
+<div class="post-author mr-2">Posted by: <span>{{this.User.name}}</span></div>

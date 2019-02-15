@@ -1,0 +1,43 @@
+<div class="d-flex align-self-stretch h-100 flex-column sidebar-wrap">
+    <a class="navbar-brand justify-content-center d-flex flex-row" href="#">
+        <img class="d-flex align-self-center" src="/images/logo.png" id="logo" alt="">
+        <div class="d-flex align-self-center">PTSDNet</div>
+    </a>
+    <h2>
+        <i class='far fa-list-alt'></i>
+        <span>Categories</span>
+    </h2>
+    <ul class="list-unstyled components flex-column flex-nowrap">
+
+        <li class="active forum">
+            <a href="#forumSubmenu" data-toggle="collapse" aria-expanded="false">
+                Forum
+            </a>
+            {{#if categories}}
+            <ul class="collapse list-unstyled" id="forumSubmenu">
+                {{#each categories}}
+                <li>
+                    <a class="d-flex justify-content-left" href="/viewcategory/{{this.categoryId}}">{{this.categoryName}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </li>
+
+        <li class="nav-item active events">
+            <a class="nav-link" href="/events">Events
+            </a>
+        </li>
+        <li class="nav-item active assessment">
+            <a class="nav-link" href="/assessment">Assessment
+
+            </a>
+        </li>
+        <li class="nav-item active profile">
+            <a class="nav-link" href="/viewuser/{{user.userId}}">Profile
+            </a>
+        </li>
+    </ul>
+
+</div>

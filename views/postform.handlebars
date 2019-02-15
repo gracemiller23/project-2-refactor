@@ -1,0 +1,36 @@
+<div class="container">
+
+  <div class="col-md-12">
+    <form action="/postform" method="POST">
+      <div>
+        <div class="row">
+          <div class="col-lg-2">
+            <label for="post-title">Title:</label>
+          </div>
+          <div class="col-lg-8">
+            <input type="text" id="post-title" class="form-control" name="post_title" value="{{post_title}}">
+          </div>
+        </div>
+        <div class="row mb-4">
+          <br/>
+          <div class="col-lg-2">
+            <label for="post-title">Comment:</label>
+          </div>
+          <div class="col-lg-8">
+            <textarea rows="4" cols="50" id="post-content" class="form-control" name="post_content">{{post_content}}</textarea>
+          </div>
+        </div>
+        <div class="row text-center">
+          <br/>
+          <div class="col-lg-12">
+            <button class="btn btn-primary" type="submit">Add Post</button>
+          </div>
+          <input type="hidden" name="post_id" value="{{post_id}}" />
+          <input type="hidden" name="post_type" value="{{post_type}}" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src="../js/postform.js" type="text/javascript"></script>
