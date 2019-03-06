@@ -48,14 +48,13 @@
                 <span class="postalCode">{{postalCode}}</span>
             </p>
 
-            {{#if (isUser EventCreator.userId user)}}
-            <button class="editEvent icon-btn" type="button" data-event-id={{id}}>
-                <i class="fas fa-edit"></i>
-            </button>
-            <button class="deleteEvent icon-btn" type="button" data-event-id={{id}}>
-                <i class="far fa-trash-alt"></i>
-            </button>
-            {{/if}} {{#if User_Id}} {{#each User_Id}} {{#if (isAttending UserAttendEvents.Event_ID ../id)}} {{log "the attending function
+            {{#each EventCreator}}
+            {{#if (isUser ../../user.userId userId)}}
+            <button class="editEvent icon-btn" type="button" data-event-id={{id}}><i class="fas fa-edit"></i></button>
+            <button class="deleteEvent icon-btn" type="button" data-event-id={{id}}><i class="far fa-trash-alt"></i></button>
+            {{/if}}
+            {{/each}}
+            {{#if User_Id}} {{#each User_Id}} {{#if (isAttending UserAttendEvents.Event_ID ../id)}} {{log "the attending function
             maybe worked"}}
             <button class="unattend" type="button" data-event-id={{../id}}>Don't Attend</button>
 

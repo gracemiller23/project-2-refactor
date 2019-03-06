@@ -39,12 +39,13 @@ app.use(passport.session());
 // Handlebars config -- here's where we also define default layout, instead of where it was before
 var hbs = exphbs.create({
   helpers: {
-    isUser: function (variable1, variable2) {
-      if (variable1 == variable2) {
-          console.log("user owns event");
+    isUser: function (user, eventCreator) {
+      console.log(`inside of isUser in server.js userId = ${user} and eventCreator = ${eventCreator}`)
+      if (user == eventCreator) {
+         
           return true;
       } else {
-          console.log("user does not own event");
+         
           return false;
       }
   },
@@ -185,6 +186,24 @@ db.sequelize.sync({ force: (db.process_env !== "production") }).then(function ()
                 });
               });
           });
+      }).then(function(){
+        db.User.create({
+          name: "New",
+          avatar: "https://r.hswstatic.com/w_907/gif/tesla-cat.jpg",
+          coverImg: "https://r.hswstatic.com/w_907/gif/tesla-cat.jpg",
+          rank: 'E-6',
+          branch: 'army',
+          deployment: 'Iraq',
+          mos: 'Awesome',
+          bio: 'Kicked names, took ass.'
+        }).then(function (testuser) {
+          db.Credential.create({
+            userId: testuser.userId,
+            credentialSource: 'local',
+            credentialName: 'new@gmail.com',
+            credentialSecret: '1234',
+          })
+        })
       });
     }
   });

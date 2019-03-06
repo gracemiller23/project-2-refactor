@@ -1,4 +1,4 @@
-{{log "you made it to the all events page!"}}
+
 {{log "all events json" user
 events
 }}
@@ -198,15 +198,16 @@ events
             </p>
              <button class="viewEvent icon-btn" type="button" data-event-id={{id}}><i class="far fa-eye"></i></button>
             <button class="addComment icon-btn" type="button" data-event-id={{id}}><i class="fas fa-reply"></i></button>
-
-            {{#if (isUser EventCreator.userId user)}}
+          
+          {{#each EventCreator}}
+            {{#if (isUser ../../user.userId userId)}}
             <button class="editEvent icon-btn" type="button" data-event-id={{id}}><i class="fas fa-edit"></i></button>
             <button class="deleteEvent icon-btn" type="button" data-event-id={{id}}><i class="far fa-trash-alt"></i></button>
             {{/if}}
+            {{/each}}
 {{#if User_Id}}
 {{#each User_Id}}
-{{#if (isAttending UserAttendEvents.Event_ID ../id)}}
-        {{log "the attending function maybe worked"}}  
+{{#if (isAttending UserAttendEvents.Event_ID ../user.userId)}}  
       <button class="unattend" type="button" data-event-id={{../id}}>Don't Attend</button>
 
         {{/if}}  
@@ -214,7 +215,6 @@ events
         {{else}}
     <button class="attend" type="button" data-event-id={{id}}>Attend</button>
 
-        {{log "display attend button"}}
         {{/if}}
             </div>
         </div>
