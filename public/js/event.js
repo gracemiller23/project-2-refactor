@@ -31,6 +31,10 @@ $(document).ready(function () {
     //allows the user to input zip code and find nearby events
     $(".zip-search-btn").on("click", findEventsByZip);
 
+    //attend or unattend an event
+    $(".unattend").on("click", unAttendEvent);
+    $(".attend").on("click", attendEvent);
+
     ///////////////////////functions used above
 
     // function handleUpdateSubmission(event){
@@ -135,8 +139,7 @@ $(document).ready(function () {
         };
     };
 
-    $(".unattend").on("click", unAttendEvent);
-    $(".attend").on("click", attendEvent);
+  
 
     //// Attend an event
 

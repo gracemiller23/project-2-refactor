@@ -49,22 +49,22 @@ var hbs = exphbs.create({
           return false;
       }
   },
-  isAttending: function(userAttend, eventId){
-    let attending;
+  isAttending: function(userAttendArray, actualUserId){
+    let attending= false;
+    if(userAttendArray.length > 0){
+    
     console.log("______________________________")
-    console.log("in isattending: " + userAttend + "/" + eventId)
+    console.log("in isattending: " + userAttendArray[0].userId + "/" + actualUserId)
     console.log("______________________________")
-
-    if (userAttend === eventId){
-      console.log("we have registered attending");
-      attending= true;
-      return attending;
-    }else{
-      console.log("we have registered NOT attending");
-
-      attending = false;
-      return attending;
-    };
+for (i=0; i<userAttendArray.length; i++){
+  if (userAttendArray[i].userId === actualUserId){
+    console.log("we have registered attending");
+    attending= true;
+  }
+}
+}
+return attending
+    
   }
   },
   defaultLayout: 'main'
