@@ -6,6 +6,7 @@ var moment = require("moment");
 
 //view all events
 exports.allEvents = function(req, res){
+    //add variable to grab the current time/date  and show only later events
     db.CalEvent.findAll(           
       {include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"}]}
       ).then(function(CalEvents){
@@ -25,6 +26,7 @@ exports.allEvents = function(req, res){
         let jsonString = JSON.stringify(result);
       
         res.renderWithContext("all-events", result);
+       
     }).catch(function(error){
       console.log(error)
   });

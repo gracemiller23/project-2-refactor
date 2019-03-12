@@ -61,75 +61,85 @@
                 {{/each}}
 
 
-     
-
-                    {{#if (isAttending User_Id ../user.userId )}}
-                        
-
-                        <button class="unattend" type="button" data-event-id={{id}}>Don't Attend</button>
-
-                        {{else}}
-                        <button class="attend" type="button" data-event-id={{id}}>Attend</button>
-
-                     
-                    
-                    
-                    {{/if}}
-
-       
 
 
-            </div>
-        </div>
-    </div>
-    {{/each}}
+                {{#if (isAttending User_Id ../user.userId )}}
 
-    <div class="eventComments">
-        <div class="category-name">Comments</div>
 
-        {{#each comments}}
+                <button class="unattend" type="button" data-event-id={{id}}>Don't Attend</button>
 
-        {{log "inside of comments!!!!!!!!!!!!!!!!!!\n\n" this}}
-        <div class="oneComment">
-            <div class="topOfComment">
-                {{#each User_Id}}
-                <small class="text-muted category">Posted by: {{name}} <span class="post-rank mr-2">
-                        <div class="rank-img {{branch}}-{{rank}}"></div>
-                    </span></small>
-                {{/each}}
-                <small class="text-muted">{{./createdAt}}</small>
+                {{else}}
+                <button class="attend" type="button" data-event-id={{id}}>Attend</button>
+
+
+
+
+                {{/if}}
                 <br>
-            </div>
-            <div class="commentBody">
-                <p>{{./content}}</p>
-            </div>
-            <div class="commentOptions">
-                {{#each ./User_Id}} {{#if (isUser userId ../../user)}}
-                <button class="deleteComment icon-btn" type="button" data-event-id={{../id}}>
-                    <i class="far fa-trash-alt"></i>
-                </button>
-                {{/if}} {{/each}}
-            </div>
+          
+                    <div class="card" style="margin: 2% auto; width: 80%;">
+                        <h5 class="card-header">See Who's Going:</h5>
+                        <div class="card-body">
+                            {{#each User_Id}}
+                            <p class="card-text">
+                             <a href="/viewuser/{{userId}}"><img src="{{avatar}}" style="width:50px; height:auto;"> {{name}}</a> 
+                            </p>
+                          {{/each}}
+                        </div>
+                    </div>
 
+
+            
+            </div>
         </div>
-
         {{/each}}
 
+        <div class="eventComments">
+            <div class="category-name">Comments</div>
 
-        <form>
-            <div class="form-group event-comment-form">
-                <label for="commentInput1">Add a comment</label>
-                <input type="text" name="Comment" class="form-control" id="new-comment-text" required>
+            {{#each comments}}
+
+            {{log "inside of comments!!!!!!!!!!!!!!!!!!\n\n" this}}
+            <div class="oneComment">
+                <div class="topOfComment">
+                    {{#each User_Id}}
+                    <small class="text-muted category">Posted by: {{name}} <span class="post-rank mr-2">
+                            <div class="rank-img {{branch}}-{{rank}}"></div>
+                        </span></small>
+                    {{/each}}
+                    <small class="text-muted">{{./createdAt}}</small>
+                    <br>
+                </div>
+                <div class="commentBody">
+                    <p>{{./content}}</p>
+                </div>
+                <div class="commentOptions">
+                    {{#each ./User_Id}} {{#if (isUser userId ../../user)}}
+                    <button class="deleteComment icon-btn" type="button" data-event-id={{../id}}>
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    {{/if}} {{/each}}
+                </div>
+
             </div>
-            {{#each event}} {{log "in handlebars event id attached to a new comment" ./id}}
-            <button type="submit" class="btn btn-primary" id="submit-comment" data-event-id={{./id}}>Post
-                Comment</button>
+
             {{/each}}
-        </form>
+
+
+            <form>
+                <div class="form-group event-comment-form">
+                    <label for="commentInput1">Add a comment</label>
+                    <input type="text" name="Comment" class="form-control" id="new-comment-text" required>
+                </div>
+                {{#each event}} {{log "in handlebars event id attached to a new comment" ./id}}
+                <button type="submit" class="btn btn-primary" id="submit-comment" data-event-id={{./id}}>Post
+                    Comment</button>
+                {{/each}}
+            </form>
+        </div>
+
     </div>
 
-</div>
 
 
-
-<script type="text/javascript" src="/js/event.js"></script>
+    <script type="text/javascript" src="/js/event.js"></script>
