@@ -12,17 +12,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
 
 
-  app.get("/event/edit/:id", isAuthenticated, function (req, res) {
-    db.CalEvent.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"},{model: db.EventComments, as:"EventComment_ID", include:[{model: db.User, as: "User_Id"}]}]
-     }).then(function(dbCalEvent){
-        res.renderWithContext("eventedit", dbCalEvent);
-     });
-    
-  });
+  app.get("/event/edit/:id", isAuthenticated, eventsController.goToEventEdit);
  
 
   //allows users to view all events
@@ -32,21 +22,8 @@ module.exports = function (app) {
   app.get("/events/:id", isAuthenticated, eventsController.singleEvent);
 
     //retrieves one, specified event
-    app.get("/api/events/:id", isAuthenticated, function(req, res){
-
-       db.CalEvent.findOne({
-           where: {
-               id: req.params.id
-           },
-           include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"},{model: db.EventComments, as:"EventComment_ID", include:[{model: db.User, as: "User_Id"}]}]
-        }).then(function(dbCalEvent){
-            res.json(dbCalEvent)
-        });
-
-    });
+    app.get("/api/events/:id", isAuthenticated, eventsController.getOneEvent);
  
-
-
     //adds a new event to the database
     app.post("/events", isAuthenticated, eventsController.createEvent);
 

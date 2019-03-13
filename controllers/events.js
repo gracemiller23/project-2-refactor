@@ -74,6 +74,32 @@ exports.allEvents = function(req, res){
  
   }
 
+  //api endpoint to get one event 
+  exports.getOneEvent = function(req, res){
+
+    db.CalEvent.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"},{model: db.EventComments, as:"EventComment_ID", include:[{model: db.User, as: "User_Id"}]}]
+     }).then(function(dbCalEvent){
+         res.json(dbCalEvent)
+     });
+
+ }
+
+ exports.goToEventEdit = function (req, res) {
+    db.CalEvent.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"},{model: db.EventComments, as:"EventComment_ID", include:[{model: db.User, as: "User_Id"}]}]
+     }).then(function(dbCalEvent){
+        res.renderWithContext("eventedit", dbCalEvent);
+     });
+    
+  }
+
   //create a new event
   exports.createEvent = function(req, res){
     //adds the user id of the person who created the event to the new event object
