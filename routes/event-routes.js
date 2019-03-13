@@ -31,19 +31,19 @@ module.exports = function (app) {
   //allows users to view a single event
   app.get("/events/:id", isAuthenticated, eventsController.singleEvent);
 
-    // //retrieves one, specified event
-    // app.get("/api/events/:id", isAuthenticated, function(req, res){
+    //retrieves one, specified event
+    app.get("/api/events/:id", isAuthenticated, function(req, res){
 
-    //    db.CalEvent.findOne({
-    //        where: {
-    //            id: req.params.id
-    //        },
-    //        include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"},{model: db.EventComments, as:"EventComment_ID", include:[{model: db.User, as: "User_Id"}]}]
-    //     }).then(function(dbCalEvent){
-    //         res.json(dbCalEvent)
-    //     });
+       db.CalEvent.findOne({
+           where: {
+               id: req.params.id
+           },
+           include: [{model: db.User, as: "User_Id"}, {model: db.User, as: "EventCreator"},{model: db.EventComments, as:"EventComment_ID", include:[{model: db.User, as: "User_Id"}]}]
+        }).then(function(dbCalEvent){
+            res.json(dbCalEvent)
+        });
 
-    // });
+    });
  
 
 
